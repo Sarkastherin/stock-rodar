@@ -1,5 +1,5 @@
 class ApiGoogleSheet {
-  static async getResponse(range, sheetId = mainData.ID_SS) {
+  static async getResponse(range) {
     let response;
     try {
       response = await gapi.client.sheets.spreadsheets.values.get({
@@ -21,7 +21,7 @@ class ApiGoogleSheet {
   static async postData(range, data) {
     try {
       let response = await gapi.client.sheets.spreadsheets.values.append({
-        spreadsheetId: mainData.ID_SS,
+        spreadsheetId: sheetId,
         range: range,
         includeValuesInResponse: true,
         insertDataOption: "INSERT_ROWS",
