@@ -1,5 +1,5 @@
 // URL del archivo JSON
-const url = '/credentials.json';
+const url = 'https://raw.githubusercontent.com/Sarkastherin/stock-rodar/main/credentials.json';
 const mainData = {}
 async function getCredentials() {
     try {
