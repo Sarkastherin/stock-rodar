@@ -12,8 +12,9 @@ async function handleSaveMov(event) {
       DataForm.cantidad = document.getElementById("cantidad").value;
       await Movimiento.saveMovimiento(DataForm)
       modalHide('myModalLoading')
-      modalShow('¡Guardo con exito ✔️!','<p>Los datos han sido cargados</p>')
-      console.log(DataForm);
+      modalShow('¡Guardo con exito ✔️!',`
+      <p>Los datos han sido cargados</p>`)
+      Movimientos_UI.openUIMovimiento()
     } else {
       modalShow('Falta completar algunos datos ⚠️', '<p>Debe seleccionar un artículo</p>')
     }
