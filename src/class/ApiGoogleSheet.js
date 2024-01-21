@@ -1,5 +1,5 @@
 class ApiGoogleSheet {
-  static async getResponse(range, sheetId = sheetId) {
+  static async getResponse(range) {
     let response;
     try {
       response = await gapi.client.sheets.spreadsheets.values.get({
