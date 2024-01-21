@@ -1,0 +1,63 @@
+<div class="container-small mt-5" id="movimientos">
+    <h2>Movimientos</h2>
+    <form class="row needs-validation g-1" novalidate id="formMovimientos">
+        <label for="area" class="form-label ">Tipo de movimiento <span class="text-danger">*</span></label>
+        <div class="col-6">
+            <input type="radio" class="btn-check" name="options" id="Entrada" autocomplete="off" required>
+            <label class="btn btn-outline-success w-100" for="Entrada">Entrada</label>
+        </div>
+        <div class="col-6">
+            <input type="radio" class="btn-check" name="options" id="Salida" autocomplete="off" required>
+            <label class="btn btn-outline-danger w-100" for="Salida">Salida</label>
+        </div>
+        <div class="col-12">
+            <label for="area" class="col-form-label">Área <span class="text-danger">*</span></label>
+            <select class="form-select" id="area" required>
+                <option selected value=""></option>
+            </select>
+        </div>
+        <div class="col-12">
+            <label for="articulo" class="col-form-label">
+                Artículo<span class="text-danger">*</span>
+            </label>
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" aria-describedby="searchProduct" id="articulo" readonly required>
+                <button class="btn btn-outline-secondary" type="button" id="searchProduct"  data-bs-toggle="modal" data-bs-target="#modalProducts" onclick="Movimientos_UI.handleSearchProduct()">Buscar</button>
+            </div>
+        </div>
+        <div class="col-12">
+            <label for="cantidad" class="col-form-label">
+                Cantidad <span class="text-danger">*</span>
+            </label>
+            <input type="number" min="1" class="form-control" id="cantidad" required />
+        </div>
+        <div class="row g-2 mt-3 mx-auto">
+            <div class="col-12 container-btn">
+                <button type="button" class="btn btn-rodar" onclick="handleSaveMov(event)">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </form>
+    <!-- Button trigger modal -->
+  
+  <!-- Modal -->
+  <div class="modal fade" id="modalProducts" tabindex="-1" aria-labelledby="modalProductsLabel" aria-hidden="true">
+    <div class="modal-dialog" modal-dialog-scrollable>
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalProductsLabel">Artículos</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <input type="text" class="form-control mb-3" placeholder="Buscar articulos" onkeyup="Movimientos_UI.handleFilterArticulos(event)">
+            <ul class="modal-list-products"></ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

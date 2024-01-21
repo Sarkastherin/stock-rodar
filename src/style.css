@@ -1,0 +1,24 @@
+:root {
+    --primary: #ff6a00;
+    --primary-light: #f48231;
+}
+.modal-list-products li{
+    list-style-type: none;
+}
+input.btn {
+    max-width: 375px;
+    width: 90%;
+}
+input.btn:hover {
+    background-color: rgb(238, 240, 240);
+}
+.btn-rodar {
+    background-color: var(--primary) ;
+    color: white ;
+    font-weight: 600 ;
+}
+.btn-rodar:hover {
+    background-color: var(--primary-light) ;
+    color: white ;
+    font-weight: 600 ;
+}
