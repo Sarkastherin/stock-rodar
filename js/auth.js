@@ -1,16 +1,3 @@
-// URL del archivo JSON
-const url = 'https://raw.githubusercontent.com/Sarkastherin/stock-rodar/main/credentials.json';
-/* async function getCredentials() {
-    try {
-        let response = await fetch(url);
-        let credentials = await response.json();
-        mainData.CLIENT_ID = credentials.CLIENT_ID;
-        mainData.API_KEY = credentials.API_KEY;
-        mainData.ID_SS = credentials.spreadsheetId
-    } catch (error) {
-        console.error('Error al cargar el archivo JSON:', error)
-    }
-} */
 const DISCOVERY_DOC = ['https://sheets.googleapis.com/$discovery/rest?version=v4', 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
 const SCOPES = 'https://mail.google.com/ https://www.googleapis.com/auth/spreadsheets';
 let tokenClient;
