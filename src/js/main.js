@@ -1,7 +1,20 @@
-let articulos;
-async function loadedWindow() {
-  await Movimientos_UI.openUIMovimiento()
+function loadedWindow() {
+  openUI()
 }
+const containerLoading = document.getElementById('containerLoading')
+let ChildContLoading;
+function openLoading() {
+  interface.setAttribute('hidden','');
+  containerLoading.innerHTML = LoadingHTML;
+  ChildContLoading = document.querySelector('.loader')
+}
+function openUI() {
+  interface.removeAttribute('hidden');
+  ChildContLoading.remove()
+}
+window.addEventListener("load", openLoading);
+let articulos;
+
 
 async function loadPage(srcPage, body = interface) {
   let response;

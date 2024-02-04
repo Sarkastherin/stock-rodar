@@ -15,7 +15,7 @@
 <body>
   <nav class="navbar bg-body-tertiary bg-dark border-bottom border-body" data-bs-theme="dark"">
         <div class=" container-fluid">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="./index.html">
       <img src="./assets/rodar_logo-PhotoRoom.png-PhotoRoom.png" alt="Logo" height="40"
         class="d-inline-block align-text-top">
       Movimiento de Materiales
@@ -27,16 +27,44 @@
     <div class="collapse navbar-collapse" id="btnNavbar">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-upload"></i> Cargar movimiento</a>
+          <a class="nav-link" href="#" onclick="Movimientos_UI.openUIMovimiento(event)"><i class="bi bi-upload"></i> Cargar movimiento</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#"><i class="bi bi-boxes"></i> Artículos</a>
+          <a class="nav-link" href="#" onclick="Articulo_UI.openUIArticulos(event)"><i class="bi bi-boxes"></i> Artículos</a>
         </li>
     </div>
     </div>
   </nav>
-  <div class="container container-main" id="interface">
-    <h1>Control de Stock</h1>
+  <div class="container" id="containerLoading">
+
+  </div>
+  <div class="container container-main" id="interface" hidden>
+    <h1 class="my-5 text-center">Movimiento de Materiales y Stock</h1>
+    <div class="card-group m-auto" style="max-width: 700px">
+      <div class="card">
+        <div class="box-img btn btn-light-rodar">
+          <img src="./assets/icons/simulacion.png" class="card-img-top" alt="..." onclick="Movimientos_UI.openUIMovimiento(event)">
+        </div>
+        <div class="card-body">
+          <h5 class="card-title">Movimientos</h5>
+          <p class="card-text">
+          <i class="bi bi-caret-right-fill color-primary"></i> Ingresar entradas y salidas de materiales<br>
+          
+        </div>
+      </div>
+      <div class="card">
+        <div class="box-img btn btn-light-rodar">
+        <img src="./assets/icons/inspeccion.png" class="card-img-top" alt="..." onclick="Articulo_UI.openUIArticulos(event)">
+      </div>
+        <div class="card-body">
+          <h5 class="card-title">Artículos</h5>
+          <p class="card-text">
+          <i class="bi bi-caret-right-fill color-primary"></i> Inventario<br>
+          <i class="bi bi-caret-right-fill color-primary"></i> Visualizar movimientos por artículos<br>
+          <i class="bi bi-caret-right-fill color-primary"></i> Actualización manual de Stock</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="modal" tabindex="-1" id="myModalMessage">
     <div class="modal-dialog">
@@ -50,6 +78,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+          <button type="button" class="btn btn-dark" id="secondButtonModal" hidden>Confirmar</button>
         </div>
       </div>
     </div>
@@ -80,7 +109,7 @@
   <script src="./js/main.js"></script>
   <script src="./js/UI.js"></script>
   <script src="./class/ApiGoogleSheet.js"></script>
-  <script src="./class/Products.js"></script>
+  <script src="./class/Articulos.js"></script>
   <script src="./class/Areas.js"></script>
   <script src="./class/Movimientos.js"></script>
   <script src="./class/Dates.js"></script>
