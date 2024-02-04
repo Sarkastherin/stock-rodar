@@ -1,4 +1,6 @@
 const SrcMovimientos = "MOVIMIENTOS!A1:ZZZ";
+const DataForm = {};
+let secondButtonModal;
 class Movimiento {
   constructor({ id, fecha, area, tipo, articulo, cantidad }) {
     this.id = id;
@@ -21,7 +23,8 @@ class Movimiento {
   static async saveMovimiento(data) {
     try {
       data.id = await this.createId();
-      data.fecha = FormatsDate.latinFormat()
+      data.fecha = FormatsDate.latinFormat();
+      if(data.tipo === 'Salida') {data.cantidad = Number(data.cantidad) * -1}
       let newMovimiento = new Movimiento(data);
       let headers = await ApiGoogleSheet.getHeaders(SrcMovimientos);
       newMovimiento = objectToArray(data, headers);
@@ -44,11 +47,41 @@ class Movimiento {
       console.log(e);
     }
   }
+  static async getStock(){
+    try {
+      let Movimientos = await this.getMovimientos();
+      let Stock = Movimientos.reduce((obj,item) => {
+        if (!obj[item.articulo]) {
+          obj[item.articulo] = Number(item.cantidad)
+        }
+        else {
+          obj[item.articulo] = obj[item.articulo] + Number(item.cantidad)
+        }
+        return obj
+      }, {});
+      let Articulos = await Articulo.getArticulos();
+      let newData = Articulos.map(item => {
+        if(Stock.hasOwnProperty(item.id)) {
+          item.stock = Stock[item.id]
+        }
+        else {
+          item.stock = 0
+        }
+        return item
+      })
+      return newData
+    } catch (e) {
+      console.log(e);
+    }
+  }
 }
 class Movimientos_UI {
-  static async openUIMovimiento() {
+  static async openUIMovimiento(event) {
+    activeLink(event);
+    //filterTable;
     await loadPage("./html/movimientos.html");
     await this.loadArea();
+    openUI()
   }
   static async loadArea(inputId = "area") {
     try {
@@ -67,46 +100,99 @@ class Movimientos_UI {
       console.log(e);
     }
   }
-  static loadListOFArticulos(articulos) {
+  static loadListArticulos(articulos) {
     let ul = document.querySelector(".modal-list-products");
     ul.innerHTML = "";
     articulos.map((item) => {
       let li = document.createElement("li");
       li.innerHTML = `
       <i class="bi bi-circle" title="${item.id}"></i>
-      <input class="btn text-start" type="button" title="${item.id}" value="${item.nombre}"  data-bs-toggle="button" onclick="Movimientos_UI.handleSelectArticulo(event)">
-      `;
+      <input 
+        class="btn text-start" 
+        type="button" title="${item.id}" 
+        value="${item.nombre}"  
+        data-bs-toggle="button" 
+        onclick="Movimientos_UI.selectArticulo(event)">`;
       ul.appendChild(li);
     });
   }
-  static async handleSearchProduct() {
+  static async searchArticulo() {
     try {
-      articulos = await Articulo.getArticulos();
-      this.loadListOFArticulos(articulos);
+      Stock = await Movimiento.getStock();
+      this.loadListArticulos(Stock);
     } catch (e) {
       console.log(e);
     }
   }
-  static handleFilterArticulos(event) {
+  static filterArticulos(event) {
     let word = normalizeString(event.target.value);
-    let articulosFilter = articulos.filter((item) => {
+    let articulosFilter = Stock.filter((item) => {
       if (item.nombre) {
         let normalizedItemName = normalizeString(item.nombre);
         return normalizedItemName.includes(word);
       }
     });
-    this.loadListOFArticulos(articulosFilter);
+    this.loadListArticulos(articulosFilter);
   }
-  static handleSelectArticulo(event) {
+  static async selectArticulo(event) {
     let IdArticulo = event.target.title;
+    
     let icon = document.querySelector(`i[title='${IdArticulo}']`);
     icon.classList.replace("bi-circle", "bi-circle-fill");
-    let articulo = document.querySelector(`input[title='${IdArticulo}']`);
+
+    
     let modalElement = document.getElementById("modalProducts");
     let modal = bootstrap.Modal.getInstance(modalElement);
     modal.hide();
+    let articulo = await Articulo.getArticuloById(IdArticulo);
     let inputArticulo = document.getElementById("articulo");
-    inputArticulo.value = articulo.value;
-    inputArticulo.title = articulo.title;
+    inputArticulo.value = articulo.nombre;
+    inputArticulo.title = articulo.id;
+    document.getElementById('unidad').value = articulo.unidad;
+    document.getElementById('cantidad_stock').value = articulo.stock
+  }
+  static showConfirm(data) {
+    let textConfirm = `
+    <p>Usted está por registrar los siguientes datos:</p>
+    <ul>
+      <li><strong>Tipo: </strong>${data.tipo}</li>
+      <li><strong>Área: </strong>${data.area}</li>
+      <li><strong>Artículo: </strong>${document.getElementById("articulo").value}</li>
+      <li><strong>Cantidad: </strong>${data.cantidad}</li>
+    </ul>
+    `
+    modalShow('Confirmar movimiento', textConfirm, true)
+    
+  }
+  static async saveMovimiento(event) {
+    let articulo = document.getElementById("articulo").value;
+    let form = document.querySelector("form");
+    if (UI.isValidForm(event, form)) {
+      if (articulo) {
+        let checked = document.querySelector('input[name="options"]:checked');
+        DataForm.tipo = checked.id;
+        DataForm.area = document.getElementById("area").value;
+        DataForm.articulo = document.getElementById("articulo").title;
+        DataForm.cantidad = document.getElementById("cantidad").value;
+        this.showConfirm(DataForm)
+        secondButtonModal.addEventListener('click',async () => {
+          modalHide()
+          modalShowLoading()
+          await Movimiento.saveMovimiento(DataForm)
+          modalHide('myModalLoading')
+          modalShow('¡Guardo con exito ✔️!',`
+          <p>Los datos han sido cargados</p>`)
+          form.reset()
+          form.classList.remove('was-validated')
+        })
+        
+      } else {
+        modalShow('Falta completar algunos datos ⚠️', '<p>Debe seleccionar un artículo</p>')
+      }
+    }
+    else {
+      modalShow('Falta completar algunos datos ⚠️', '<p>Debe completar todo los campos obligatorios</p>')
+    }
+    event.preventDefault();
   }
 }

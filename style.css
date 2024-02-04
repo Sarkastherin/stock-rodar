@@ -1,6 +1,7 @@
 :root {
     --primary: #ff6a00;
     --primary-light: #f48231;
+    --light: rgb(238, 240, 240);
 }
 .modal-list-products li{
     list-style-type: none;
@@ -10,7 +11,7 @@ input.btn {
     width: 90%;
 }
 input.btn:hover {
-    background-color: rgb(238, 240, 240);
+    background-color: var(--light);
 }
 .btn-rodar {
     background-color: var(--primary) ;
@@ -22,3 +23,65 @@ input.btn:hover {
     color: white ;
     font-weight: 600 ;
 }
+.sticky {
+    position: sticky;
+    top: 0;
+  }
+td {
+    font-size: 0.9rem;
+}
+.btn-icon {
+    padding: 0.25rem;
+    background-color: var(--light);
+    border: none
+}
+.btn-icon:hover {
+    background-color:var(--primary);
+    color: white;
+}
+.modal-header--articulo {
+    background: var(--primary-light);
+    color: white;
+}
+.loader{
+    height: 150px;
+    width: 20%;
+    text-align: center;
+    padding: 1em;
+    margin: 0 auto 1em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--primary);
+  }
+  
+  /*
+    Set the color of the icon
+  */
+  svg path,
+  svg rect{
+    fill: var(--primary);
+  }
+  .color-primary{
+    color: var(--primary);
+  }
+  .box-img {
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+  }
+  .card img {
+    padding: 2rem;
+    height: 100%;
+    width: auto;
+    margin: auto;
+  }
+  .btn-light-rodar {
+    background: var(--light);
+    border: none;
+  }
+  .btn-light-rodar:hover {
+    background: var(--primary-light);
+  }

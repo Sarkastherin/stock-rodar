@@ -1,0 +1,112 @@
+<div class="container mt-5">
+  <input
+    type="text"
+    class="form-control my-3"
+    onkeyup="Articulo_UI.filterTable(event)"
+    placeholder="Filtrar por nombre..."
+  />
+  <table class="table table-hover">
+    <thead class="table-dark">
+      <tr>
+        <th class="sticky">Articulo</th>
+        <th class="sticky">Unidad</th>
+        <th class="sticky">Stock</th>
+        <th class="sticky text-center">
+          <i class="bi bi-eye-fill"></i>
+        </th>
+      </tr>
+    </thead>
+    <tbody id="tbodyStock"></tbody>
+  </table>
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="cardArticulo"
+    tabindex="-1"
+    aria-labelledby="cardArticuloLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header modal-header--articulo">
+          <div class="placeholder-glow">
+            <p class="small m-0">Artículo:</p>
+            <p class="modal-title fs-6 m-0" id="cardArticuloLabel">
+              <i class="bi bi-box-seam-fill"></i>
+              <span id="nameArticulo"></span>
+            </p>
+          </div>
+
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body" id="bodyCardArticulo">
+          <p class="placeholder-glow">
+            <strong>Movimientos:</strong
+            ><span class="badge text-bg-dark float-end"
+              >En Stock: <span id="stock"></span
+            ></span>
+          </p>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Fecha</th>
+                <th>Tipo</th>
+                <th>Área</th>
+                <th>Cantidad</th>
+              </tr>
+            </thead>
+            <tbody id="cardContent"></tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-rodar"
+            data-bs-target="#ajustarStockModal"
+            data-bs-toggle="modal"
+          >
+            Ajustar Stock
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="ajustarStockModal"
+    aria-hidden="true"
+    tabindex="-1"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="ajustarStockModalLabel">
+            Ingrese la cantidad real
+          </h1>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <input type="number" class="form-control" id="stock_real" />
+        </div>
+        <div class="modal-footer">
+          <button
+            class="btn btn-rodar"
+            onclick="Articulo_UI.saveNewStock()"
+          >
+            Guardar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

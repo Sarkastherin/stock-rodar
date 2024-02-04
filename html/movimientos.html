@@ -21,19 +21,27 @@
                 Artículo<span class="text-danger">*</span>
             </label>
             <div class="input-group mb-3">
-                <input type="text" class="form-control" aria-describedby="searchProduct" id="articulo" readonly required>
-                <button class="btn btn-outline-secondary" type="button" id="searchProduct"  data-bs-toggle="modal" data-bs-target="#modalProducts" onclick="Movimientos_UI.handleSearchProduct()">Buscar</button>
+                <input type="text" class="form-control" aria-describedby="searchArticulo" id="articulo" readonly required>
+                <button class="btn btn-outline-secondary" type="button" id="searchArticulo"  data-bs-toggle="modal" data-bs-target="#modalProducts" onclick="Movimientos_UI.searchArticulo()">Buscar</button>
             </div>
         </div>
-        <div class="col-12">
+        <div class="col-5">
+            <label for="cantidad_stock" class="col-form-label">Cantidad en Stock</label>
+            <input type="number" min="1" class="form-control" id="cantidad_stock" disabled/>
+        </div>
+        <div class="col-5">
             <label for="cantidad" class="col-form-label">
                 Cantidad <span class="text-danger">*</span>
             </label>
             <input type="number" min="1" class="form-control" id="cantidad" required />
         </div>
+        <div class="col-2">
+            <label for="unidad" class="col-form-label">Unidad</label>
+            <input type="text" class="form-control" id="unidad" disabled/>
+        </div>
         <div class="row g-2 mt-3 mx-auto">
             <div class="col-12 container-btn">
-                <button type="button" class="btn btn-rodar" onclick="handleSaveMov(event)">
+                <button type="button" class="btn btn-rodar" onclick="Movimientos_UI.saveMovimiento(event)">
                     Guardar
                 </button>
             </div>
@@ -50,12 +58,8 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-            <input type="text" class="form-control mb-3" placeholder="Buscar articulos" onkeyup="Movimientos_UI.handleFilterArticulos(event)">
+            <input type="text" class="form-control mb-3" placeholder="Buscar articulos" onkeyup="Movimientos_UI.filterArticulos(event)">
             <ul class="modal-list-products"></ul>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
         </div>
       </div>
     </div>
