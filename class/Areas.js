@@ -4,12 +4,15 @@ class Area {
         let area;
         try {
             let response = await ApiGoogleSheet.getResponse(SrcArea);
-            if (response.status === 200) {
+            if(response){
+              if (response.status === 200) {
                 area = response.result.values;
                 area = arrayToObject(area);
               }
               return area;
+            }
         } catch (e) {
+         
           console.log(e);
         }
     }

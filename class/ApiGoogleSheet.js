@@ -8,7 +8,12 @@ class ApiGoogleSheet {
       });
       return response;
     } catch (e) {
-      console.log(e);
+      modalShow('Error',`
+        <p>No se ha tenido la respuesta esperada<br>
+          <code><strong>Message:</strong> ${e.result.error.message}</code><br>
+          <code><strong>Código:</strong> ${e.result.error.code}</code>
+        </p>
+        `);
     }
   }
   static async getHeaders(range) {
