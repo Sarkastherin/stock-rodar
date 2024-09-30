@@ -1,4 +1,4 @@
-const DISCOVERY_DOC = ['https://sheets.googleapis.com/$discovery/rest?version=v4', 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
+/* const DISCOVERY_DOC = ['https://sheets.googleapis.com/$discovery/rest?version=v4', 'https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest'];
 const SCOPES = 'https://mail.google.com/ https://www.googleapis.com/auth/spreadsheets';
 let tokenClient;
 let gapiInited = false;
@@ -67,4 +67,4 @@ function handleSignoutClick() {
         btn_auth.innerText = 'Authorize';
         btn_sigout.setAttribute('hidden','');
     }
-}
+} */

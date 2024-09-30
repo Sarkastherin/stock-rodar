@@ -1,0 +1,38 @@
+@import "bootstrap/scss/bootstrap";
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css");
+$primary: #ff6a00;
+$primary-light: #f48231;
+$light: rgb(238, 240, 240);
+.btn-rodar {
+  background-color: $primary;
+  color: white;
+  font-weight: 600;
+  &:hover {
+    background-color: $primary-light;
+    color: white;
+    font-weight: 600;
+  }
+}
+tbody {
+  tr {
+    &:hover {
+      cursor: pointer;
+      td {
+        background-color: $light;
+        color: $primary;
+      }
+    }
+  }
+}
+.modal-list-products {
+  li{
+    list-style-type: none;
+    input {
+      max-width: 375px;
+      width: 90%;
+      &:hover {
+        background-color: $light;
+      }
+    }
+  }
+}

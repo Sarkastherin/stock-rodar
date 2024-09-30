@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Gestión de stock</title>
+  <link rel="icon" type="image/png" href="assets/icons/en-stock.png">
+  <script async defer src="https://apis.google.com/js/api.js"></script>
+  <script async defer src="https://accounts.google.com/gsi/client"></script>
+</head>
+
+<body>
+  <nav class="navbar bg-body-tertiary bg-dark" data-bs-theme="dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#/">
+        <img src="assets/icons/en-stock.png" alt="Logo" width="30" class="d-inline-block align-text-top" />
+        Gestión de stock
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="#">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/articulos">Articulos</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#/movimientos">Movimientos</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-5" id="content"></div>
+  <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="modalLabel">Modal title</h1>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <div class="col-auto" id="close">
+            <button type="button" class="btn btn-outline-secondary close-btn" data-bs-dismiss="modal">Cerrar</button>
+          </div>
+          <div class="col-auto" id="btnAction"></div>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="load">
+  </div>
+</body>
+
+</html>
